@@ -4,10 +4,11 @@
 {% include 'head.html' %}
 
 <body> 
-    <div class = "center_sort_view">
-    {% block content %}
-    {% endblock %}
+    <div>
+        <h1>로그인성공!!</h1>
+        <h6>{{user_id}}님이 로그인하셨습니다.</h6>
     </div>
+    <a href="/account/logout/">로그아웃</a>
 </body>
 
 </html>
