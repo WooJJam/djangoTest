@@ -18,6 +18,9 @@ def register(request):
         passwd = request.POST.get('passwd', None)
         passwd2 = request.POST.get('passwd2', None)
         email = request.POST.get('email', None)
+        year = request.POST.get('year')
+        month = request.POST.get('month')
+        day = request.POST.get('day')
         # birth = request.POST["birth"]
         # phone = request.POST["phone"]
         if not (user_id and passwd and passwd2 and email):
@@ -25,10 +28,12 @@ def register(request):
         elif passwd != passwd2:
             context['error'] = "비밀번호가 다릅니다."
         else:
+            birth = year+month+day
             user = CustomerUser(
                 userid = user_id,
                 passwd = make_password(passwd),
                 email = email,
+                birthday = birth,
             )
             user.save()
 
