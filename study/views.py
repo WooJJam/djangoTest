@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
 from .models import CustomerUser
 
 
@@ -36,6 +35,7 @@ def register(request):
                 birthday = birth,
             )
             user.save()
+            return redirect('/study/login')
 
         return render(request, 'study/signup.html', context)
 
@@ -54,6 +54,8 @@ def user_login(request):
             user = CustomerUser.objects.get(userid = user_id)
             if check_password(passwd, user.passwd):
                 request.session['user']=user.id
+                request.session['email']=user.email
+                request.session['birth']=user.birthday
                 return redirect('/')
             else:
                 context['error'] = "비밀번호가 틀렸습니다."
@@ -72,6 +74,6 @@ def home(request):
         username['user_id'] = user.userid
         return render(request, 'base.html', username)
 
-    return HttpResponse("로그인 성공")
+    return render(request, 'base.html', username)
 
 

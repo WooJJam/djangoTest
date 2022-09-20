@@ -3,12 +3,16 @@
 
 {% include 'head.html' %}
 
-<body> 
-    <div>
-        <h1>로그인성공!!</h1>
-        <h6>{{user_id}}님이 로그인하셨습니다.</h6>
-    </div>
+<body>
+<div>
+    {% if user_id %}
+    <h1>로그인성공!!</h1>
+    <h6>{{user_id}}님이 로그인하셨습니다.</h6>
     <a href="/account/logout/">로그아웃</a>
+    {% else %}
+    로그인을해라.
+</div>
+{% endif %}
 </body>
 
 </html>
